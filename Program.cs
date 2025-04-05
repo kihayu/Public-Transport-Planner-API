@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
-using PublicTransportPlannerApi.Services;
+using PublicTransportPlannerApi.Services.GoogleMapsService;
+using PublicTransportPlannerApi.Services.TransitService;
 
 var builder = WebApplication.CreateBuilder(args);
 

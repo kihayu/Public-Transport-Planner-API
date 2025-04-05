@@ -1,6 +1,6 @@
 using PublicTransportPlannerApi.Models;
 
-namespace PublicTransportPlannerApi.Services;
+namespace PublicTransportPlannerApi.Services.GoogleMapsService;
 
 /// <summary>
 /// Interface for Google Maps service operations
@@ -15,7 +15,7 @@ public interface IGoogleMapsService
     /// <param name="departureTime">UNIX timestamp for departure time</param>
     /// <returns>DistanceMatrixResponse with transit information</returns>
     Task<DistanceMatrixResponse> GetDistanceMatrixAsync(string origin, string destination, long departureTime);
-    
+
     /// <summary>
     /// Gets place predictions for an input string using Google Places Autocomplete API
     /// </summary>

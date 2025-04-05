@@ -1,9 +1,7 @@
-using System.Net.Http.Json;
 using System.Web;
-using Microsoft.Extensions.Configuration;
 using PublicTransportPlannerApi.Models;
 
-namespace PublicTransportPlannerApi.Services;
+namespace PublicTransportPlannerApi.Services.GoogleMapsService;
 
 /// <summary>
 /// Service for interacting with Google Maps API

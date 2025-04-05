@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using PublicTransportPlannerApi.Models;
-using PublicTransportPlannerApi.Services;
+using PublicTransportPlannerApi.Services.GoogleMapsService;
 
 namespace PublicTransportPlannerApi.Controllers;
 

@@ -1,6 +1,7 @@
 using PublicTransportPlannerApi.Models;
+using PublicTransportPlannerApi.Services.GoogleMapsService;
 
-namespace PublicTransportPlannerApi.Services;
+namespace PublicTransportPlannerApi.Services.TransitService;
 
 /// <summary>
 /// Service implementation for transit calculations

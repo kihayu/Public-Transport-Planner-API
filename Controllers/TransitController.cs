@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using PublicTransportPlannerApi.Models;
-using PublicTransportPlannerApi.Services;
+using PublicTransportPlannerApi.Services.TransitService;
 
 namespace PublicTransportPlannerApi.Controllers;
 

@@ -1,6 +1,6 @@
 using PublicTransportPlannerApi.Models;
 
-namespace PublicTransportPlannerApi.Services;
+namespace PublicTransportPlannerApi.Services.TransitService;
 
 /// <summary>
 /// Service for calculating transit times between addresses
