@@ -15,7 +15,8 @@ namespace PublicTransportPlannerApi.Controllers;
 /// <param name="transitService">Service for transit calculations</param>
 /// <param name="logger">Logger instance</param>
 [ApiController]
-[Route("api/[controller]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class TransitController(ITransitService transitService, ILogger<TransitController> logger) : ControllerBase
 {
     private readonly ITransitService _transitService = transitService ?? throw new ArgumentNullException(nameof(transitService));

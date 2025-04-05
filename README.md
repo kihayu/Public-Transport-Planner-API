@@ -78,7 +78,7 @@ http://localhost:5279/
 ### Transit Calculations
 
 ```
-POST /api/transit/calculate
+POST /api/v1/transit/calculate
 ```
 
 Calculate transit times between multiple addresses.
@@ -86,7 +86,7 @@ Calculate transit times between multiple addresses.
 ### Places Autocomplete
 
 ```
-GET /api/places/autocomplete
+GET /api/v1/places/autocomplete
 ```
 
 Get address suggestions based on user input.

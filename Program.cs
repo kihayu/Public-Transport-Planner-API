@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using PublicTransportPlannerApi.Services.GoogleMapsService;
 using PublicTransportPlannerApi.Services.TransitService;
@@ -7,6 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+});
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 
 // Configure lowercase URLs for all routes
 builder.Services.Configure<RouteOptions>(options =>
@@ -36,17 +50,16 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
+    options.IncludeXmlComments(xmlPath);
+
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Public Transport Planner API",
         Version = "v1",
         Description = "An API for planning public transport routes and autocompleting addresses"
     });
-
-    // Include XML comments in Swagger UI
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
-    options.IncludeXmlComments(xmlPath);
 
     // Add security definitions if needed
     // options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { ... });
@@ -60,7 +73,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Public Transport Planner API v1");
+        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint(
+                $"/swagger/{description.GroupName}/swagger.json",
+                $"Public Transport Planner API {description.GroupName}");
+        }
+
         options.RoutePrefix = string.Empty; // Serves the Swagger UI at the app's root
         options.EnableFilter();
         options.EnableDeepLinking();

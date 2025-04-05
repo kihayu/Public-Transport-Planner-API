@@ -9,7 +9,8 @@ namespace PublicTransportPlannerApi.Controllers;
 /// Controller for Google Places API operations
 /// </summary>
 [ApiController]
-[Route("api/[controller]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class PlacesController(IGoogleMapsService googleMapsService, ILogger<PlacesController> logger) : ControllerBase
 {
     private readonly IGoogleMapsService _googleMapsService = googleMapsService ?? throw new ArgumentNullException(nameof(googleMapsService));
